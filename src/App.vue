@@ -1,53 +1,45 @@
 <template>
-  <div class="page-container">
-    <md-app md-waterfall md-mode="fixed">
-      <md-app-toolbar class="md-primary">
-        <span class="md-title">My Title</span>
-      </md-app-toolbar>
+  <md-app id="app" md-waterfall md-mode="fixed">
+    <md-app-toolbar class="md-primary">
+      <span class="md-title">My Title</span>
+      <div id="nav">
+        <router-link to="/">Home</router-link>
+        <span>|</span>
+        <router-link to="/about">About</router-link>
+      </div>
+    </md-app-toolbar>
 
-      <md-app-content>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error quibusdam, non molestias et! Earum magnam,
-          similique, quo recusandae placeat dicta asperiores modi sint ea repudiandae maxime? Quae non explicabo,
-          neque.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error quibusdam, non molestias et! Earum magnam,
-          similique, quo recusandae placeat dicta asperiores modi sint ea repudiandae maxime? Quae non explicabo,
-          neque.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error quibusdam, non molestias et! Earum magnam,
-          similique, quo recusandae placeat dicta asperiores modi sint ea repudiandae maxime? Quae non explicabo,
-          neque.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error quibusdam, non molestias et! Earum magnam,
-          similique, quo recusandae placeat dicta asperiores modi sint ea repudiandae maxime? Quae non explicabo,
-          neque.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error quibusdam, non molestias et! Earum magnam,
-          similique, quo recusandae placeat dicta asperiores modi sint ea repudiandae maxime? Quae non explicabo,
-          neque.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error quibusdam, non molestias et! Earum magnam,
-          similique, quo recusandae placeat dicta asperiores modi sint ea repudiandae maxime? Quae non explicabo,
-          neque.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error quibusdam, non molestias et! Earum magnam,
-          similique, quo recusandae placeat dicta asperiores modi sint ea repudiandae maxime? Quae non explicabo,
-          neque.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error quibusdam, non molestias et! Earum magnam,
-          similique, quo recusandae placeat dicta asperiores modi sint ea repudiandae maxime? Quae non explicabo,
-          neque.</p>
-      </md-app-content>
-    </md-app>
-  </div>
+    <md-app-content>
+      <router-view/>
+    </md-app-content>
+  </md-app>
 </template>
-<script>
-  export default {
-    name: 'Waterfall'
-  }
-</script>
-<style lang="scss" scoped>
-  .md-app {
-    max-height: 400px;
-    border: 1px solid rgba(#000, .12);
-  }
 
-  // Demo purposes only
-  .md-drawer {
-    width: 230px;
-    max-width: calc(100vw - 125px);
+<style lang="scss">
+  #app {
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+    max-height: 100vh;
+    border: 1px solid rgba(#000, .12);
+
+    .md-toolbar.md-primary {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    #nav {
+      padding: 30px;
+      background-color: whitesmoke;
+      a {
+        font-weight: bold;
+        color: #2c3e50;
+        &.router-link-exact-active {
+          color: #42b983;
+        }
+      }
+    }
   }
 </style>
