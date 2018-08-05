@@ -13,6 +13,7 @@
     "vue": "^2.5.16",
     "vue-material": "^1.0.0-beta-10.2",
     "vue-router": "^3.0.1",
+    "vuelidate": "^0.7.4",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
@@ -24,9 +25,12 @@
     "@vue/test-utils": "^1.0.0-beta.20",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "^23.0.1",
+    "cookie-session": "^2.0.0-beta.3",
+    "json-server": "^0.14.0",
     "node-sass": "^4.9.0",
     "sass-loader": "^7.0.1",
-    "json-server": "^0.14.0",
+    "set-cookie": "0.0.4",
+    "uuid": "^3.3.2",
     "vue-template-compiler": "^2.5.16"
   },
   "eslintConfig": {

@@ -1,10 +1,21 @@
 <template>
   <md-app id="app" md-waterfall md-mode="fixed">
     <md-app-toolbar class="md-primary">
-      <span class="md-title">Job Marketplace</span>
+      <span class="md-title">
+        <router-link to="/">
+          Job Marketplace
+        </router-link>
+      </span>
       <div id="nav">
+        <router-link to="/">
+          <icon-base icon-name="home">
+            <icon-home/>
+          </icon-base>
+        </router-link>
         <router-link to="/login">
-          <icon-base icon-name="user"><icon-user /></icon-base>
+          <icon-base icon-name="user">
+            <icon-user/>
+          </icon-base>
         </router-link>
       </div>
     </md-app-toolbar>
@@ -16,14 +27,25 @@
 </template>
 
 <script>
+  import {mapActions} from 'vuex'
   import IconUser from './components/icons/IconUser'
+  import IconHome from './components/icons/IconHome'
   import IconBase from './components/IconBase'
 
   export default {
     name: 'app',
     components: {
       IconUser,
+      IconHome,
       IconBase
+    },
+    methods: {
+      ...mapActions(['fetchJobs', 'updateUserEmail'])
+    },
+    created() {
+      if (!this.loaded) {
+        this.fetchJobs()
+      }
     }
   }
 </script>
@@ -47,6 +69,11 @@
       justify-content: space-between;
     }
 
+    .md-title .router-link-active {
+      color: white;
+      font-size: 1.5em;
+    }
+
     #nav {
       padding: 30px;
       background-color: whitesmoke;
@@ -59,5 +86,16 @@
         }
       }
     }
+
+    @media (min-width: 320px) and (max-width: 767px) {
+      .md-title .router-link-active {
+        font-size: 1em;
+      }
+
+      #nav {
+        padding: 10px;
+      }
+    }
+
   }
 </style>

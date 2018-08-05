@@ -5,8 +5,7 @@
       <h1>{{job.title}}.</h1>
       <h2>{{job.company}}.</h2>
       <p>{{job.description}}.</p>
-      <p>{{job.applicantsIds}}.</p>
-      <apply-button :jobId="job.id" :userEmail="'lucasabreuoliveira@gmail.com'"></apply-button>
+      <apply-button :jobId="job.id" :userEmail="user.email"></apply-button>
     </md-content>
 
   </div>
@@ -21,23 +20,17 @@
     }
   }
 </style>
-
+1
 
 <script>
-  import { mapActions, mapState } from 'vuex'
+  import {mapState} from 'vuex'
   import ApplyButton from '@/components/ApplyButton.vue'
 
   export default {
     name: 'JobsList',
-    computed: mapState(['jobs']),
+    computed: mapState(['jobs', 'user']),
     components: {
       ApplyButton
-    },
-    methods: {
-      ...mapActions(['fetchJobs'])
-    },
-    mounted() {
-      this.fetchJobs()
     }
   }
 </script>

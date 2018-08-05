@@ -15,12 +15,26 @@ export default new Vuex.Store({
   state: {
     jobs: [],
     jobsMap: {},
+    user: { email: '' },
+    loaded: false,
     status: STATUS_LOADING
   },
   mutations: {
+    updateLoadStatus({loaded}, newStatus) {
+      loaded = newStatus
+    },
+
     addJob({jobs, jobsMap}, job) {
       jobs.push(job)
       jobsMap[job.id] = jobs[jobs.length - 1]
+    },
+
+    updateUserEmail({user}, newEmail) {
+      user.email = newEmail
+    },
+
+    updateStatus({status}, newStatus) {
+      status = newStatus
     },
 
     addJobApplicant({jobsMap}, props) {
@@ -54,23 +68,57 @@ export default new Vuex.Store({
   },
 
   actions: {
-    async fetchJobs({commit}) {
+    async fetchJobs({commit, dispatch}) {
       try {
         const response = await axios.get(JOBS_URL)
         response.data.forEach(job => {
           commit('addJob', job)
         })
+        dispatch('changeStatusToLoaded')
+        commit('updateLoadStatus', true)
       } catch (e) {
         console.error(e)
+        dispatch('changeStatusToError')
       }
     },
 
-    addJobApplicant({commit}, applicantId, jobId) {
-      commit('addJobApplicant', applicantId, jobId)
+    isApplied({state}, props) {
+      const {applicantId, jobId} = props
+      console.log('dfdf')
+
+      if(!jobId || !applicantId) {
+        return
+      }
+
+      const {jobsMap} = state
+
+      return jobsMap[jobId].applicantsIds.indexOf(applicantId.trim()) >= 0
     },
 
-    removeJobApplicant({commit}, applicantId, jobId) {
-      commit('removeJobApplicant', applicantId, jobId)
+    updateUserEmail({commit}, userEmail) {
+      commit('updateUserEmail', userEmail)
+    },
+
+    addJobApplicant({commit}, props) {
+      const {applicantId, jobId} = props
+      commit('addJobApplicant', {applicantId, jobId})
+    },
+
+    removeJobApplicant({commit}, props) {
+      const {applicantId, jobId} = props
+      commit('removeJobApplicant', {applicantId, jobId})
+    },
+
+    changeStatusToLoaded({commit}) {
+      commit('updateStatus', STATUS_LOADED)
+    },
+
+    changeStatusToError({commit}) {
+      commit('updateStatus', STATUS_ERROR)
+    },
+
+    changeStatusToLoading({commit}) {
+      commit('updateStatus', STATUS_LOADING)
     }
   }
 })
