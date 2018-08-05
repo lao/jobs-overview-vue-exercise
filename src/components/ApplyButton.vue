@@ -1,15 +1,35 @@
 <template>
   <div class="apply-button-container">
-    <md-button class="md-primary md-raised">Apply</md-button>
-    <md-button class="md-accent md-raised">Retract</md-button>
+    <md-button class="md-primary md-raised" v-on:click="onApply">
+      Apply
+    </md-button>
+    <md-button class="md-accent md-raised" v-on:click="onRetract">
+      Retract
+    </md-button>
+    {{jobId}}
+    {{userEmail}}
   </div>
 </template>
 
 <script>
+  import { mapActions } from 'vuex'
+
   export default {
-    name: 'HelloWorld',
+    name: 'ApplyButton',
     props: {
-      msg: String
+      jobId: Number,
+      userEmail: String
+    },
+    methods: {
+      ...mapActions(['addJobApplicant', 'removeJobApplicant']),
+
+      onRetract() {
+        this.removeJobApplicant({applicantId: this.userEmail, jobId: this.jobId})
+      },
+
+      onApply() {
+        this.addJobApplicant({applicantId: this.userEmail, jobId: this.jobId})
+      }
     }
   }
 </script>

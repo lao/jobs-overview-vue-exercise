@@ -6,7 +6,7 @@
       <h2>{{job.company}}.</h2>
       <p>{{job.description}}.</p>
       <p>{{job.applicantsIds}}.</p>
-      <apply-button></apply-button>
+      <apply-button :jobId="job.id" :userEmail="'lucasabreuoliveira@gmail.com'"></apply-button>
     </md-content>
 
   </div>
@@ -24,28 +24,20 @@
 
 
 <script>
-  import axios from 'axios'
+  import { mapActions, mapState } from 'vuex'
   import ApplyButton from '@/components/ApplyButton.vue'
 
   export default {
-    name: 'home',
-    data: () => {
-      return {
-        jobs: [],
-        errors: []
-      }
-    },
+    name: 'JobsList',
+    computed: mapState(['jobs']),
     components: {
       ApplyButton
     },
-    async created() {
-      try {
-        const response = await axios.get(`http://localhost:3000/jobs`)
-        this.jobs = response.data
-      } catch (e) {
-        console.error(e)
-        this.errors.push(e)
-      }
+    methods: {
+      ...mapActions(['fetchJobs'])
+    },
+    mounted() {
+      this.fetchJobs()
     }
   }
 </script>
