@@ -1,11 +1,12 @@
 <template>
   <div class="apply-button-container">
-    <md-button v-if="showApply" class="md-primary md-raised" v-on:click="onApply" :disabled="!userEmail">
+    <md-button v-if="showApply" class="md-primary md-raised" v-on:click="onApply">
       Apply
     </md-button>
     <md-button v-else class="md-accent md-raised" v-on:click="onRetract">
       Retract
     </md-button>
+    <md-snackbar :md-active.sync="displayAlert" md-persistent>Please enter your email in order to apply!<router-link to="/login">Go to login here</router-link></md-snackbar>
   </div>
 </template>
 
@@ -24,18 +25,31 @@
     },
     data() {
       return {
-        showApply: true
+        showApply: true,
+        displayAlert: false
       }
     },
     methods: {
       ...mapActions(['addJobApplicant', 'removeJobApplicant', 'isApplied']),
 
+      showEmailAlert() {
+        this.displayAlert = true
+      },
+
       onRetract() {
+        if (!this.userEmail) {
+          this.showEmailAlert()
+          return
+        }
         this.removeJobApplicant({applicantId: this.userEmail, jobId: this.jobId})
         this.showApply = true
       },
 
       onApply() {
+        if (!this.userEmail) {
+          this.showEmailAlert()
+          return
+        }
         this.addJobApplicant({applicantId: this.userEmail, jobId: this.jobId})
         this.showApply = false
       }
