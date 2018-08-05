@@ -24,3 +24,7 @@ npm run lint
 ```
 npm run test:unit
 ```
+
+# Credits
+
+Icons by https://www.flaticon.com/authors/freepik

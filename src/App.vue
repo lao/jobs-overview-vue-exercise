@@ -1,11 +1,11 @@
 <template>
   <md-app id="app" md-waterfall md-mode="fixed">
     <md-app-toolbar class="md-primary">
-      <span class="md-title">My Title</span>
+      <span class="md-title">Job Marketplace</span>
       <div id="nav">
-        <router-link to="/">Home</router-link>
-        <span>|</span>
-        <router-link to="/about">About</router-link>
+        <router-link to="/login">
+          <icon-base icon-name="user"><icon-user /></icon-base>
+        </router-link>
       </div>
     </md-app-toolbar>
 
@@ -14,6 +14,19 @@
     </md-app-content>
   </md-app>
 </template>
+
+<script>
+  import IconUser from './components/icons/IconUser'
+  import IconBase from './components/IconBase'
+
+  export default {
+    name: 'app',
+    components: {
+      IconUser,
+      IconBase
+    }
+  }
+</script>
 
 <style lang="scss">
   #app {
@@ -24,6 +37,10 @@
     color: #2c3e50;
     max-height: 100vh;
     border: 1px solid rgba(#000, .12);
+
+    &, .md-app-content {
+      background-color: rgba(230, 230, 230, 1);
+    }
 
     .md-toolbar.md-primary {
       display: flex;
@@ -36,6 +53,7 @@
       a {
         font-weight: bold;
         color: #2c3e50;
+        padding: 0 20px;
         &.router-link-exact-active {
           color: #42b983;
         }
