@@ -84,7 +84,6 @@ export default new Vuex.Store({
 
     isApplied({state}, props) {
       const {applicantId, jobId} = props
-      console.log('dfdf')
 
       if(!jobId || !applicantId) {
         return
