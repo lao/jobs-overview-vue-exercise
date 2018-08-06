@@ -1,7 +1,7 @@
 <template>
   <div class="page-container">
 
-    <md-content v-for="job in jobs" class="md-elevation-3">
+    <md-content v-for="job in jobs" class="md-elevation-3 job-container">
       <h1>{{job.title}}.</h1>
       <h2>{{job.company}}.</h2>
       <p>{{job.description}}.</p>
@@ -20,7 +20,6 @@
     }
   }
 </style>
-1
 
 <script>
   import {mapState} from 'vuex'

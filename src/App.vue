@@ -27,7 +27,7 @@
 </template>
 
 <script>
-  import {mapActions} from 'vuex'
+  import {mapActions, mapState} from 'vuex'
   import IconUser from './components/icons/IconUser'
   import IconHome from './components/icons/IconHome'
   import IconBase from './components/IconBase'
@@ -39,6 +39,7 @@
       IconHome,
       IconBase
     },
+    computed: mapState(['loaded']),
     methods: {
       ...mapActions(['fetchJobs', 'updateUserEmail'])
     },

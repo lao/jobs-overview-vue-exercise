@@ -10,7 +10,7 @@ Vue.use(VueMaterial)
 Vue.use(Router)
 Vue.use(Vuex)
 
-describe('AppleButton.vue', () => {
+describe('ApplyButton.vue', () => {
 
   let store
   let actions
